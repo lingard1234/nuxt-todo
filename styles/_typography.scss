@@ -1,0 +1,213 @@
+@import 'variables';
+
+// ===== 타이포그래피 =====
+body {
+  background: $bg-primary;
+  color: $text-dark;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  letter-spacing: -0.3px;
+}
+
+h1, .h1 {
+  font-size: 2rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+
+  @include respond-to('md') {
+    font-size: 1.75rem;
+  }
+}
+
+h2, .h2 {
+  font-size: 1.75rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+}
+
+h3, .h3 {
+  font-size: 1.5rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+}
+
+h4, .h4 {
+  font-size: 1.25rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-md;
+}
+
+h5, .h5 {
+  font-size: 1rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-normal;
+  margin-bottom: $spacing-sm;
+}
+
+h6, .h6 {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: $spacing-sm;
+}
+
+p {
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+small, .small {
+  font-size: $font-size-xs;
+}
+
+strong {
+  font-weight: $font-weight-bold;
+}
+
+// ===== 텍스트 유틸 =====
+.text-dark {
+  color: $text-dark;
+}
+
+.text-secondary {
+  color: $text-light;
+}
+
+.text-light {
+  color: $text-lighter;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.text-success {
+  color: $success;
+}
+
+.text-warning {
+  color: $warning;
+}
+
+.text-danger {
+  color: $danger;
+}
+
+.text-info {
+  color: $info;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-start {
+  text-align: left;
+}
+
+.text-end {
+  text-align: right;
+}
+
+// ===== 폰트 가중치 =====
+.fw-normal {
+  font-weight: $font-weight-normal;
+}
+
+.fw-medium {
+  font-weight: $font-weight-medium;
+}
+
+.fw-semibold,
+.fw-500,
+.fw-600 {
+  font-weight: $font-weight-semibold;
+}
+
+.fw-bold {
+  font-weight: $font-weight-bold;
+}
+
+// ===== 폰트 사이즈 =====
+.fs-xs {
+  font-size: $font-size-xs;
+}
+
+.fs-sm {
+  font-size: $font-size-sm;
+}
+
+.fs-base {
+  font-size: $font-size-base;
+}
+
+.fs-lg {
+  font-size: $font-size-lg;
+}
+
+.fs-xl {
+  font-size: $font-size-xl;
+}
+
+.fs-2xl {
+  font-size: $font-size-2xl;
+}
+
+.fs-3xl {
+  font-size: $font-size-3xl;
+}
+
+// ===== 라인 높이 =====
+.lh-tight {
+  line-height: $line-height-tight;
+}
+
+.lh-normal {
+  line-height: $line-height-normal;
+}
+
+.lh-relaxed {
+  line-height: $line-height-relaxed;
+}
+
+// ===== 링크 =====
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-dark;
+  }
+}
+
+// ===== 리스트 =====
+ul, ol {
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-2xl;
+
+  li {
+    margin-bottom: $spacing-sm;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}

@@ -1,0 +1,172 @@
+@import 'variables';
+
+// ===== 페이드인 애니메이션 =====
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.fade-in {
+  animation: fadeIn $transition-base ease-in-out;
+}
+
+.fade-out {
+  animation: fadeOut $transition-base ease-in-out;
+}
+
+// ===== 슬라이드 애니메이션 =====
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-up {
+  animation: slideInUp $transition-slow ease-in-out;
+}
+
+.slide-in-down {
+  animation: slideInDown $transition-slow ease-in-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft $transition-slow ease-in-out;
+}
+
+.slide-in-right {
+  animation: slideInRight $transition-slow ease-in-out;
+}
+
+// ===== 리스트 트랜지션 (vue transition-group) =====
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all $transition-slow ease;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+// ===== 스케일 애니메이션 =====
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.scale-in {
+  animation: scaleIn $transition-base ease-in-out;
+}
+
+.scale-out {
+  animation: scaleOut $transition-base ease-in-out;
+}
+
+// ===== 펄스 애니메이션 =====
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// ===== 로딩 스피너 =====
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}

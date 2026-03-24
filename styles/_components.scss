@@ -1,0 +1,167 @@
+@import 'variables';
+
+// ===== 배지 =====
+.badge {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-xs;
+  white-space: nowrap;
+
+  &.text-bg-primary {
+    background: $primary;
+    color: white;
+  }
+
+  &.text-bg-success {
+    background: $success;
+    color: white;
+  }
+
+  &.text-bg-warning {
+    background: $warning;
+    color: white;
+  }
+
+  &.text-bg-danger {
+    background: $danger;
+    color: white;
+  }
+
+  &.text-bg-info {
+    background: $info;
+    color: white;
+  }
+
+  &.text-bg-dark {
+    background: $text-dark;
+    color: white;
+  }
+
+  &.text-bg-light {
+    background: $secondary-light;
+    color: $text-dark;
+  }
+}
+
+// ===== 진행도 =====
+.progress {
+  background: $border-light;
+  border-radius: $radius-lg;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, $primary, lighten($primary, 10%));
+  transition: width $transition-slow ease-in-out;
+  height: 100%;
+}
+
+// ===== 리스트 그룹 =====
+.list-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-group-item {
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  transition: all $transition-base;
+
+  &:hover {
+    background: $bg-tertiary;
+    border-color: $primary;
+  }
+
+  &.active {
+    background: $primary-light;
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ===== 공통 상태 =====
+.done {
+  text-decoration: line-through;
+  color: $secondary;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+// ===== 그림자 유틸 =====
+.shadow-xs {
+  box-shadow: $shadow-xs;
+}
+
+.shadow-sm {
+  box-shadow: $shadow-sm;
+}
+
+.shadow {
+  box-shadow: $shadow-md;
+}
+
+.shadow-lg {
+  box-shadow: $shadow-lg;
+}
+
+.shadow-xl {
+  box-shadow: $shadow-xl;
+}
+
+// ===== 라운드 유틸 =====
+.rounded {
+  border-radius: $radius-lg;
+}
+
+.rounded-sm {
+  border-radius: $radius-sm;
+}
+
+.rounded-md {
+  border-radius: $radius-md;
+}
+
+.rounded-lg {
+  border-radius: $radius-lg;
+}
+
+.rounded-xl {
+  border-radius: $radius-xl;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+// ===== 테두리 =====
+.border {
+  border: 1px solid $border-color;
+}
+
+.border-top {
+  border-top: 1px solid $border-color;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $border-color;
+}
+
+.border-0 {
+  border: none !important;
+}

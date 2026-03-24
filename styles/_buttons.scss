@@ -1,0 +1,100 @@
+@import 'variables';
+
+// ===== 버튼 기본 스타일 =====
+.btn {
+  border-radius: $radius-md;
+  font-weight: $font-weight-semibold;
+  transition: all $transition-base;
+  border: 1px solid transparent;
+  font-size: $font-size-sm;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:focus-visible {
+    @include focus-ring();
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// ===== Primary 버튼 =====
+.btn-primary {
+  background: $primary;
+  border-color: $primary;
+  color: white;
+  box-shadow: 0 1px 3px rgba($primary, 0.2);
+
+  &:hover:not(:disabled) {
+    background: $primary-dark;
+    border-color: $primary-dark;
+    box-shadow: 0 4px 6px rgba($primary, 0.3);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// ===== Outline Primary 버튼 =====
+.btn-outline-primary {
+  color: $primary;
+  border-color: $primary;
+  background: transparent;
+
+  &:hover:not(:disabled) {
+    background: $primary-light;
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+// ===== Secondary 버튼 =====
+.btn-outline-secondary {
+  color: $text-dark;
+  border-color: $border-color;
+  background: white;
+
+  &:hover:not(:disabled) {
+    border-color: $text-dark;
+    background: $secondary-light;
+  }
+}
+
+// ===== Success 버튼 =====
+.btn-outline-success {
+  color: $success;
+  border-color: $success;
+
+  &:hover:not(:disabled) {
+    background: $success-light;
+    border-color: $success;
+  }
+}
+
+// ===== Danger 버튼 =====
+.btn-outline-danger {
+  color: $danger;
+  border-color: $danger;
+
+  &:hover:not(:disabled) {
+    background: $danger-light;
+    border-color: $danger;
+  }
+}
+
+// ===== Small 버튼 =====
+.btn-sm {
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-xs;
+}
+
+// ===== Block 버튼 =====
+.btn-block {
+  display: block;
+  width: 100%;
+}

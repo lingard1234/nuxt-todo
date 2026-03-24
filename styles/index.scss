@@ -1,0 +1,63 @@
+@import 'variables';
+@import 'buttons';
+@import 'cards';
+@import 'forms';
+@import 'components';
+@import 'typography';
+@import 'animations';
+@import 'pages';
+@import 'utilities';
+
+// ===== 전역 설정 =====
+:root {
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --success: #{$success};
+  --warning: #{$warning};
+  --danger: #{$danger};
+  --text-dark: #{$text-dark};
+  --text-light: #{$text-light};
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $bg-primary;
+  color: $text-dark;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  letter-spacing: -0.3px;
+  margin: 0;
+  padding: 0;
+}
+
+// ===== 기본 요소 =====
+::selection {
+  background: $primary-light;
+  color: $primary;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color;
+  border-radius: 4px;
+
+  &:hover {
+    background: $border-light;
+  }
+}
