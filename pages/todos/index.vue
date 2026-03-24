@@ -1,46 +1,3 @@
-<template>
-    <section class="page-section">
-        <div class="page-header">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <div>
-                    <h1 class="page-title">할 일 목록</h1>
-                    <p class="page-subtitle">모든 할 일을 관리하세요</p>
-                </div>
-                <NuxtLink to="/" class="btn btn-sm btn-outline-secondary">← 홈</NuxtLink>
-            </div>
-        </div>
-
-        <TodoBoard class="mb-3" />
-
-        <div class="quick-nav-section">
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <h5 class="mb-3">상세 페이지</h5>
-                    <div class="quick-nav-grid">
-                        <NuxtLink v-for="todo in todoStore.todos" :key="todo.id" :to="`/todos/${todo.id}`"
-                            class="quick-nav-btn" :class="{ 'has-done': todo.done }">
-                            <span class="nav-id">#{{ todo.id }}</span>
-                            <span class="nav-title">{{ todo.title }}</span>
-                            <span v-if="todo.done" class="nav-badge">완료</span>
-                        </NuxtLink>
-
-                        <div v-if="todoStore.todos.length === 0" class="empty-state">
-                            <p class="text-secondary">아직 할 일이 없습니다</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</template>
-
-<script setup lang="ts">
-import TodoBoard from '../../components/TodoBoard.vue'
-import { useTodoStore } from '../../stores/todo'
-
-const todoStore = useTodoStore()
-</script>
-
 <style scoped lang="scss">
 .quick-nav-section {
     margin-top: 2ㅂrem;
@@ -124,3 +81,46 @@ const todoStore = useTodoStore()
     color: #6b7280;
 }
 </style>
+
+<script setup lang="ts">
+import TodoBoard from '../../components/TodoBoard.vue'
+import { useTodoStore } from '../../stores/todo'
+
+const todoStore = useTodoStore()
+</script>
+
+<template>
+    <section class="page-section">
+        <div class="page-header">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h1 class="page-title">할 일 목록</h1>
+                    <p class="page-subtitle">모든 할 일을 관리하세요</p>
+                </div>
+                <NuxtLink to="/" class="btn btn-sm btn-outline-secondary">← 홈</NuxtLink>
+            </div>
+        </div>
+
+        <TodoBoard class="mb-3" />
+
+        <div class="quick-nav-section">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h5 class="mb-3">상세 페이지</h5>
+                    <div class="quick-nav-grid">
+                        <NuxtLink v-for="todo in todoStore.todos" :key="todo.id" :to="`/todos/${todo.id}`"
+                            class="quick-nav-btn" :class="{ 'has-done': todo.done }">
+                            <span class="nav-id">#{{ todo.id }}</span>
+                            <span class="nav-title">{{ todo.title }}</span>
+                            <span v-if="todo.done" class="nav-badge">완료</span>
+                        </NuxtLink>
+
+                        <div v-if="todoStore.todos.length === 0" class="empty-state">
+                            <p class="text-secondary">아직 할 일이 없습니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,49 +1,3 @@
-<template>
-  <section class="page-section">
-    <div class="page-header">
-      <h1 class="page-title">프로젝트 소개</h1>
-      <p class="page-subtitle">이 프로젝트의 구조와 기술 스택입니다</p>
-    </div>
-
-    <div class="grid-responsive">
-      <div class="info-card">
-        <div class="card-icon">📋</div>
-        <h5 class="card-title">프로젝트</h5>
-        <p class="card-description">
-          Nuxt + Pinia + Bootstrap을 활용한<br>
-          Todo 관리 웹 애플리케이션
-        </p>
-      </div>
-
-      <div class="info-card">
-        <div class="card-icon">🛠️</div>
-        <h5 class="card-title">기술 스택</h5>
-        <ul class="tech-list">
-          <li>Nuxt 4.4.2</li>
-          <li>Vue 3.5.30</li>
-          <li>Pinia 3.0.4</li>
-          <li>Bootstrap 5.3.8</li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <div class="card-icon">📚</div>
-        <h5 class="card-title">학습 내용</h5>
-        <ul class="tech-list">
-          <li>파일 기반 라우팅</li>
-          <li>상태 관리 (Pinia Store)</li>
-          <li>컴포넌트 재사용</li>
-          <li>동적 라우팅</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="back-button mt-5">
-      <NuxtLink to="/" class="btn btn-outline-primary">홈으로 돌아가기</NuxtLink>
-    </div>
-  </section>
-</template>
-
 <style scoped lang="scss">
 .info-card {
   background: white;
@@ -115,3 +69,49 @@
   }
 }
 </style>
+
+<template>
+  <section class="page-section">
+    <div class="page-header">
+      <h1 class="page-title">프로젝트 소개</h1>
+      <p class="page-subtitle">이 프로젝트의 구조와 기술 스택입니다</p>
+    </div>
+
+    <div class="grid-responsive">
+      <div class="info-card">
+        <div class="card-icon">📋</div>
+        <h5 class="card-title">프로젝트</h5>
+        <p class="card-description">
+          Nuxt + Pinia + Bootstrap을 활용한<br>
+          Todo 관리 웹 애플리케이션
+        </p>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">🛠️</div>
+        <h5 class="card-title">기술 스택</h5>
+        <ul class="tech-list">
+          <li>Nuxt 4.4.2</li>
+          <li>Vue 3.5.30</li>
+          <li>Pinia 3.0.4</li>
+          <li>Bootstrap 5.3.8</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">📚</div>
+        <h5 class="card-title">학습 내용</h5>
+        <ul class="tech-list">
+          <li>파일 기반 라우팅</li>
+          <li>상태 관리 (Pinia Store)</li>
+          <li>컴포넌트 재사용</li>
+          <li>동적 라우팅</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="back-button mt-5">
+      <NuxtLink to="/" class="btn btn-outline-primary">홈으로 돌아가기</NuxtLink>
+    </div>
+  </section>
+</template>

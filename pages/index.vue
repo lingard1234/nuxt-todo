@@ -1,26 +1,3 @@
-<template>
-  <section class="page-section">
-    <div class="hero mb-5">
-      <div class="hero-content">
-        <p class="hero-badge">Dashboard</p>
-        <h1 class="hero-title">할 일 플래너</h1>
-        <p class="hero-subtitle">효율적으로 할 일을 관리하세요</p>
-      </div>
-
-      <div class="hero-actions">
-        <NuxtLink to="/todos" class="btn btn-primary">목록 보기</NuxtLink>
-        <NuxtLink to="/about" class="btn btn-outline-secondary">소개</NuxtLink>
-      </div>
-    </div>
-
-    <TodoBoard />
-  </section>
-</template>
-
-<script setup lang="ts">
-import TodoBoard from '../components/TodoBoard.vue'
-</script>
-
 <style scoped lang="scss">
 .hero {
   background: linear-gradient(135deg, #ffffff 0%, #f4f6ff 100%);
@@ -85,3 +62,26 @@ import TodoBoard from '../components/TodoBoard.vue'
   }
 }
 </style>
+
+<script setup lang="ts">
+import TodoBoard from '../components/TodoBoard.vue'
+</script>
+
+<template>
+  <section class="page-section">
+    <div class="hero mb-5">
+      <div class="hero-content">
+        <p class="hero-badge">Dashboard</p>
+        <h1 class="hero-title">할 일 플래너</h1>
+        <p class="hero-subtitle">효율적으로 할 일을 관리하세요</p>
+      </div>
+
+      <div class="hero-actions">
+        <NuxtLink to="/todos" class="btn btn-primary">목록 보기</NuxtLink>
+        <NuxtLink to="/about" class="btn btn-outline-secondary">소개</NuxtLink>
+      </div>
+    </div>
+
+    <TodoBoard />
+  </section>
+</template>

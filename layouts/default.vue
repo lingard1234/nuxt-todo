@@ -1,43 +1,3 @@
-<template>
-  <div class="app-shell">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
-      <div class="container-app-nav">
-        <NuxtLink to="/" class="navbar-brand">
-          <span class="brand-icon">✓</span>
-          <span class="brand-text">Todo</span>
-        </NuxtLink>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarNav" class="collapse navbar-collapse">
-          <ul class="navbar-nav ms-auto gap-2">
-            <li class="nav-item">
-              <NuxtLink to="/todos" class="nav-link fw-500">목록</NuxtLink>
-            </li>
-            <li class="nav-item">
-              <NuxtLink to="/about" class="nav-link fw-500">소개</NuxtLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <main class="main-content">
-      <div class="container-app">
-        <slot />
-      </div>
-    </main>
-  </div>
-</template>
-
 <style scoped lang="scss">
 .app-shell {
   min-height: 100vh;
@@ -121,3 +81,43 @@
   padding: 0 1rem;
 }
 </style>
+
+<template>
+  <div class="app-shell">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
+      <div class="container-app-nav">
+        <NuxtLink to="/" class="navbar-brand">
+          <span class="brand-icon">✓</span>
+          <span class="brand-text">Todo</span>
+        </NuxtLink>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto gap-2">
+            <li class="nav-item">
+              <NuxtLink to="/todos" class="nav-link fw-500">목록</NuxtLink>
+            </li>
+            <li class="nav-item">
+              <NuxtLink to="/about" class="nav-link fw-500">소개</NuxtLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container-app">
+        <slot />
+      </div>
+    </main>
+  </div>
+</template>
