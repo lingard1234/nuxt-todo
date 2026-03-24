@@ -44,7 +44,7 @@
             v-model.trim="title"
             type="text"
             class="form-input"
-            placeholder="새로운 할 일을 입력하세요..."
+            placeholder="새로운 할 일을 입력하세요."
             @keydown.enter="add"
           >
           <select v-model="priority" class="form-select">
@@ -272,7 +272,7 @@ const add = () => {
 
 .form-group-wrapper {
   display: grid;
-  grid-template-columns: 1fr 120px 100px;
+  grid-template-columns: 1fr 75px 75px;
   gap: 0.75rem;
 
   @media (max-width: 768px) {
@@ -307,13 +307,19 @@ const add = () => {
 }
 
 .form-select {
-  padding: 0.75rem 0.75rem;
+  padding: 0.75rem 0.5rem;
   border: 1px solid #eceffd;
   border-radius: 0.75rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   background: white;
+  text-align: center;
+  text-align-last: center;
   transition: all 0.2s;
   cursor: pointer;
+
+  option {
+    text-align: center;
+  }
 
   &:focus {
     outline: none;
@@ -324,6 +330,9 @@ const add = () => {
 
 .btn-add {
   border-radius: 0.75rem;
+  padding-left: 0.65rem;
+  padding-right: 0.65rem;
+  font-size: 0.9rem;
 }
 
 // 필터 버튼
