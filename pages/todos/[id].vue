@@ -81,44 +81,12 @@
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useTodoStore } from '../../stores/todo'
-import type { TodoPriority } from '../../stores/todo'
+import { getPriorityClass, getPriorityLabel } from '../../composables/useTodoPriority'
+import { useTodoDetail } from '../../composables/useTodoDetail'
 
-const route = useRoute()
-const router = useRouter()
-const todoStore = useTodoStore()
+const { route, todoStore, todo, isActive, deleteAndRedirect } = useTodoDetail()
 
-const todoId = computed(() => Number(route.params.id))
-const todo = computed(() => todoStore.todos.find((item) => item.id === todoId.value))
-
-const isActive = (id: number) => id === todoId.value
-
-const getPriorityClass = (priority: TodoPriority) => {
-  const classes: Record<TodoPriority, string> = {
-    high: 'text-bg-danger',
-    medium: 'text-bg-warning',
-    low: 'text-bg-info',
-  }
-  return classes[priority] || 'text-bg-secondary'
-}
-
-const getPriorityLabel = (priority: TodoPriority) => {
-  const labels: Record<TodoPriority, string> = {
-    high: '높음',
-    medium: '중간',
-    low: '낮음',
-  }
-  return labels[priority] || priority
-}
-
-const handleDelete = () => {
-  if (confirm('이 할 일을 삭제하시겠습니까?')) {
-    todoStore.removeTodo(todoId.value)
-    router.push('/todos')
-  }
-}
+const handleDelete = () => deleteAndRedirect()
 </script>
 
 <template>

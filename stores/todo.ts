@@ -8,12 +8,28 @@ export interface TodoItem {
   title: string
   done: boolean
   priority: TodoPriority
+  tags?: string[]
+  dueDate?: string | null
 }
 
 export const useTodoStore = defineStore('todo', () => {
   const todos = ref<TodoItem[]>([
-    { id: 1, title: 'Nuxt 라우팅 확인', done: false, priority: 'high' },
-    { id: 2, title: '컴포넌트 분리', done: true, priority: 'medium' }
+    {
+      id: 1,
+      title: 'Nuxt 라우팅 확인',
+      done: false,
+      priority: 'high',
+      tags: ['nuxt', 'routing'],
+      dueDate: null
+    },
+    {
+      id: 2,
+      title: '컴포넌트 분리',
+      done: true,
+      priority: 'medium',
+      tags: ['refactor'],
+      dueDate: null
+    }
   ])
   const nextId = ref(3)
 
@@ -28,15 +44,30 @@ export const useTodoStore = defineStore('todo', () => {
     return Math.round((completed.value / total.value) * 100)
   })
 
-  const addTodo = (title: string, priority: TodoPriority) => {
+  const addTodo = (
+    title: string,
+    priority: TodoPriority,
+    options?: {
+      tags?: string[]
+      dueDate?: string | null
+    }
+  ) => {
     todos.value.unshift({
       id: nextId.value,
       title,
       done: false,
-      priority
+      priority,
+      tags: options?.tags || [],
+      dueDate: options?.dueDate || null
     })
 
     nextId.value += 1
+  }
+
+  const replaceTodos = (items: TodoItem[]) => {
+    todos.value = [...items]
+    const maxId = items.reduce((acc, item) => Math.max(acc, item.id), 0)
+    nextId.value = maxId + 1
   }
 
   const toggleTodo = (id: number) => {
@@ -71,6 +102,7 @@ export const useTodoStore = defineStore('todo', () => {
     active,
     progress,
     addTodo,
+    replaceTodos,
     toggleTodo,
     removeTodo,
     clearCompleted,

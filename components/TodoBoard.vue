@@ -53,6 +53,20 @@
           </select>
           <button class="btn btn-primary btn-add" type="submit">추가</button>
         </div>
+        <div class="add-meta-fields">
+          <input
+            v-model="dueDate"
+            type="date"
+            class="form-input"
+            title="마감일"
+          >
+          <input
+            v-model.trim="tagsText"
+            type="text"
+            class="form-input"
+            placeholder="태그(쉼표로 구분: nuxt, vue)"
+          >
+        </div>
       </form>
 
       <!-- 필터 버튼 -->
@@ -60,34 +74,60 @@
         <button
           class="filter-btn"
           :class="{ active: filter === 'all' }"
-          @click="filter = 'all'"
+          @click="uiStore.setFilter('all')"
         >
           전체
         </button>
         <button
           class="filter-btn"
           :class="{ active: filter === 'active' }"
-          @click="filter = 'active'"
+          @click="uiStore.setFilter('active')"
         >
           진행중
         </button>
         <button
           class="filter-btn"
           :class="{ active: filter === 'done' }"
-          @click="filter = 'done'"
+          @click="uiStore.setFilter('done')"
         >
           완료
         </button>
       </div>
 
+      <div class="filter-toolbar">
+        <input
+          :value="searchQuery"
+          type="text"
+          class="form-input"
+          placeholder="검색어 입력"
+          @input="uiStore.setSearchQuery(($event.target as HTMLInputElement).value)"
+        >
+        <input
+          v-model="dateFrom"
+          type="date"
+          class="form-input form-input-toolbar"
+          title="시작일"
+        >
+        <input
+          v-model="dateTo"
+          type="date"
+          class="form-input form-input-toolbar"
+          title="종료일"
+        >
+      </div>
+
+      <p class="filter-summary">
+        총 {{ totalFiltered }}개 표시 중 · {{ page }} / {{ totalPages }} 페이지
+      </p>
+
       <!-- 할 일 목록 -->
       <div class="todo-list-wrapper">
-        <div v-if="filteredTodos.length === 0" class="empty-state">
+        <div v-if="pagedTodos.length === 0" class="empty-state">
           <p class="empty-message">표시할 항목이 없습니다</p>
         </div>
 
         <transition-group v-else name="list" tag="div" class="todo-list">
-          <div v-for="todo in filteredTodos" :key="todo.id" class="todo-item">
+          <div v-for="todo in pagedTodos" :key="todo.id" class="todo-item">
             <label class="todo-checkbox">
               <input
                 :checked="todo.done"
@@ -99,9 +139,11 @@
 
             <div class="todo-content">
               <span class="todo-title" :class="{ done: todo.done }">{{ todo.title }}</span>
-              <span class="todo-priority" :class="priorityClass(todo.priority)">
-                {{ priorityLabel(todo.priority) }}
+              <span class="todo-priority" :class="getPriorityClass(todo.priority)">
+                {{ getPriorityLabel(todo.priority) }}
               </span>
+              <span v-if="todo.tags?.length" class="todo-meta">#{{ todo.tags.join(' #') }}</span>
+              <span v-if="todo.dueDate" class="todo-meta">📅 {{ todo.dueDate }}</span>
             </div>
 
             <button
@@ -123,32 +165,64 @@
         <button class="btn btn-sm btn-outline-success" @click="todoStore.markAllDone">
           전체 완료
         </button>
+        <button class="btn btn-sm btn-outline-primary" @click="uiStore.setPage(Math.max(1, page - 1))">
+          이전 페이지
+        </button>
+        <button class="btn btn-sm btn-outline-primary" @click="uiStore.setPage(Math.min(totalPages, page + 1))">
+          다음 페이지
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTodoStore } from '../stores/todo'
 import type { TodoPriority } from '../stores/todo'
-import { useTodoView } from '../composables/useTodoView'
+import { useTodoUiStore } from '../stores/todo-ui'
+import { getPriorityClass, getPriorityLabel } from '../composables/useTodoPriority'
+import { useTodoFilters } from '../composables/useTodoFilters'
+import { useTodoPersist } from '../composables/useTodoPersist'
 
 const todoStore = useTodoStore()
+const uiStore = useTodoUiStore()
 const { todos } = storeToRefs(todoStore)
+const { filter, searchQuery, dateFrom, dateTo, page } = storeToRefs(uiStore)
+
 const title = ref('')
 const priority = ref<TodoPriority>('medium')
-const { filter, filteredTodos, priorityClass, priorityLabel } = useTodoView(todos)
+const dueDate = ref('')
+const tagsText = ref('')
+
+const { pagedTodos, totalFiltered, totalPages } = useTodoFilters(todos, uiStore)
+
+useTodoPersist(todoStore)
+
+watch([dateFrom, dateTo], ([from, to]) => {
+  uiStore.setDateRange(from, to)
+})
 
 const add = () => {
   if (!title.value) {
     return
   }
 
-  todoStore.addTodo(title.value, priority.value)
+  const tags = tagsText.value
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean)
+
+  todoStore.addTodo(title.value, priority.value, {
+    tags,
+    dueDate: dueDate.value || null
+  })
+
   title.value = ''
   priority.value = 'medium'
+  dueDate.value = ''
+  tagsText.value = ''
 }
 </script>
 
@@ -334,6 +408,17 @@ const add = () => {
   font-size: 0.9rem;
 }
 
+.add-meta-fields {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.75rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
 // 필터 버튼
 .filter-buttons {
   display: flex;
@@ -365,6 +450,32 @@ const add = () => {
     color: white;
     box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
   }
+}
+
+.filter-toolbar {
+  display: grid;
+  grid-template-columns: 1.5fr 160px 160px;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-select-toolbar,
+.form-input-toolbar {
+  width: 100%;
+}
+
+.filter-summary {
+  margin-bottom: 1rem;
+  color: #6b7280;
+  font-size: 0.85rem;
 }
 
 // 할 일 목록
@@ -485,6 +596,14 @@ const add = () => {
     text-decoration: line-through;
     color: #6c757d;
   }
+}
+
+.todo-meta {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.35rem;
 }
 
 .todo-priority {
