@@ -177,7 +177,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTodoStore } from '../stores/todo'
 import type { TodoPriority } from '../stores/todo'
@@ -186,30 +186,41 @@ import { getPriorityClass, getPriorityLabel } from '../composables/useTodoPriori
 import { useTodoFilters } from '../composables/useTodoFilters'
 import { useTodoPersist } from '../composables/useTodoPersist'
 
-const todoStore = useTodoStore()
+const todoStore = useTodoStore() 
 const uiStore = useTodoUiStore()
 const { todos } = storeToRefs(todoStore)
-const { filter, searchQuery, dateFrom, dateTo, page } = storeToRefs(uiStore)
+const { filter, searchQuery, dateFrom, dateTo, page } = storeToRefs(uiStore) 
 
+//  할 일 추가 폼 입력값
 const title = ref('')
 const priority = ref<TodoPriority>('medium')
 const dueDate = ref('')
 const tagsText = ref('')
 
+// 필터링 + 페이지네이션 처리
 const { pagedTodos, totalFiltered, totalPages } = useTodoFilters(todos, uiStore)
 
-useTodoPersist(todoStore)
+useTodoPersist(todoStore) // 로컬스토리지 연동
 
-watch([dateFrom, dateTo], ([from, to]) => {
-  uiStore.setDateRange(from, to)
-})
+const getTodayLocalIso = () => { // 오늘 날짜를 YYYY-MM-DD 형식의 문자열로 반환하는 함수
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
 
-const add = () => {
+const add = () => { // 새로운 할 일을 추가하는 함수
   if (!title.value) {
     return
   }
 
-  const tags = tagsText.value
+  if (dueDate.value && dueDate.value < getTodayLocalIso()) {
+    alert('마감일은 오늘 이전으로 설정할 수 없습니다.')
+    return
+  }
+
+  const tags = tagsText.value // 쉼표로 구분된 태그 문자열을 배열로 변환
     .split(',')
     .map((item) => item.trim())
     .filter(Boolean)
