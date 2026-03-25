@@ -184,7 +184,6 @@ import type { TodoPriority } from '../stores/todo'
 import { useTodoUiStore } from '../stores/todo-ui'
 import { getPriorityClass, getPriorityLabel } from '../composables/useTodoPriority'
 import { useTodoFilters } from '../composables/useTodoFilters'
-import { useTodoPersist } from '../composables/useTodoPersist'
 
 const todoStore = useTodoStore() 
 const uiStore = useTodoUiStore()
@@ -199,8 +198,6 @@ const tagsText = ref('')
 
 // 필터링 + 페이지네이션 처리
 const { pagedTodos, totalFiltered, totalPages } = useTodoFilters(todos, uiStore)
-
-useTodoPersist(todoStore) // 로컬스토리지 연동
 
 const getTodayLocalIso = () => { // 오늘 날짜를 YYYY-MM-DD 형식의 문자열로 반환하는 함수
   const now = new Date()

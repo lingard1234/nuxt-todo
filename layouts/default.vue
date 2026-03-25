@@ -82,6 +82,14 @@
 }
 </style>
 
+<script setup lang="ts">
+import { useTodoStore } from '../stores/todo'
+import { useTodoPersist } from '../composables/useTodoPersist'
+
+const todoStore = useTodoStore()
+useTodoPersist(todoStore)
+</script>
+
 <template>
   <div class="app-shell">
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
